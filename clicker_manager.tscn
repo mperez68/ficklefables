@@ -1,0 +1,237 @@
+[gd_scene load_steps=5 format=3 uid="uid://sq65lne138lp"]
+
+[ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://theme.tres" id="1_oljoq"]
+[ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="2_6mp7d"]
+[ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://clicker_manager.gd" id="2_di3a2"]
+[ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://goldmine.jpg" id="3_di3a2"]
+
+[node name="ClickerManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_oljoq")
+script = ExtResource("2_di3a2")
+
+[node name="ClickerListContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="ClickerBox" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
+layout_mode = 2
+
+[node name="ClickerBox2" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
+layout_mode = 2
+
+[node name="ClickerBox3" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
+layout_mode = 2
+
+[node name="ClickerBox4" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
+layout_mode = 2
+
+[node name="ClickerBox5" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
+layout_mode = 2
+
+[node name="MenuContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -156.5
+offset_top = -47.0
+offset_right = 156.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "RESET"
+
+[node name="VolumeButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "VOLUME"
+
+[node name="MusicButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "MUSIC"
+
+[node name="SfxButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "SFX"
+
+[node name="ExitButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="MineContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="MineContainer"]
+layout_mode = 2
+icon = ExtResource("3_di3a2")
+
+[node name="TopContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="TopContainer"]
+custom_minimum_size = Vector2(700, 80)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TopContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TopContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "[PORTENTS]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="TopContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TopContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TopContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "GOLD:"
+
+[node name="PanelContainer2" type="PanelContainer" parent="TopContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="TopContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TopContainer/HBoxContainer/PanelContainer2/MarginContainer2"]
+layout_mode = 2
+text = "###"
+
+[node name="ScrollContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 184.0
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "SCROLLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer3/MarginContainer"]
+layout_mode = 2
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer4" type="PanelContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer4/MarginContainer"]
+layout_mode = 2
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer5" type="PanelContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer5"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/PanelContainer5/MarginContainer"]
+layout_mode = 2
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_pressed" from="ClickerListContainer/ClickerBox" to="." method="_on_clicker_box_button_pressed"]
+[connection signal="button_pressed" from="ClickerListContainer/ClickerBox2" to="." method="_on_clicker_box_2_button_pressed"]
+[connection signal="button_pressed" from="ClickerListContainer/ClickerBox3" to="." method="_on_clicker_box_3_button_pressed"]
+[connection signal="button_pressed" from="ClickerListContainer/ClickerBox4" to="." method="_on_clicker_box_4_button_pressed"]
+[connection signal="button_pressed" from="ClickerListContainer/ClickerBox5" to="." method="_on_clicker_box_5_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/VolumeButton" to="." method="_on_volume_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/SfxButton" to="." method="_on_sfx_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MineContainer/Button" to="." method="_on_mine_pressed"]
