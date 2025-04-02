@@ -30,15 +30,19 @@ layout_mode = 2
 
 [node name="ClickerBox2" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
 layout_mode = 2
+type = 1
 
 [node name="ClickerBox3" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
 layout_mode = 2
+type = 2
 
 [node name="ClickerBox4" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
 layout_mode = 2
+type = 3
 
 [node name="ClickerBox5" parent="ClickerListContainer" instance=ExtResource("2_6mp7d")]
 layout_mode = 2
+type = 4
 
 [node name="MenuContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -67,14 +71,6 @@ text = "RESET"
 [node name="VolumeButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "VOLUME"
-
-[node name="MusicButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "MUSIC"
-
-[node name="SfxButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "SFX"
 
 [node name="ExitButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -136,9 +132,21 @@ layout_mode = 2
 [node name="MarginContainer2" type="MarginContainer" parent="TopContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TopContainer/HBoxContainer/PanelContainer2/MarginContainer2"]
+[node name="GoldLabel" type="Label" parent="TopContainer/HBoxContainer/PanelContainer2/MarginContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "###"
+
+[node name="PanelContainer3" type="PanelContainer" parent="TopContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="TopContainer/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="RateLabel" type="Label" parent="TopContainer/HBoxContainer/PanelContainer3/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "#/s"
 
 [node name="ScrollContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -224,14 +232,7 @@ text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="button_pressed" from="ClickerListContainer/ClickerBox" to="." method="_on_clicker_box_button_pressed"]
-[connection signal="button_pressed" from="ClickerListContainer/ClickerBox2" to="." method="_on_clicker_box_2_button_pressed"]
-[connection signal="button_pressed" from="ClickerListContainer/ClickerBox3" to="." method="_on_clicker_box_3_button_pressed"]
-[connection signal="button_pressed" from="ClickerListContainer/ClickerBox4" to="." method="_on_clicker_box_4_button_pressed"]
-[connection signal="button_pressed" from="ClickerListContainer/ClickerBox5" to="." method="_on_clicker_box_5_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/VolumeButton" to="." method="_on_volume_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/SfxButton" to="." method="_on_sfx_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MineContainer/Button" to="." method="_on_mine_pressed"]

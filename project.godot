@@ -11,6 +11,11 @@ config_version=5
 [application]
 
 config/name="storyclicker"
+config/tags=PackedStringArray("proof_of_concept")
 run/main_scene="uid://sq65lne138lp"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://global.tscn"

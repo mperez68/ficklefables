@@ -1,8 +1,19 @@
 extends Control
 
+@onready var gold_text: Label = %GoldLabel
+@onready var rate_text: Label = %RateLabel
 
+
+# Engine
+func _process(_delta: float) -> void:
+	rate_text.text = str(Global.rate, "/s")
+	gold_text.text = str(int(Global.gold_count))
+
+
+# Signals
 func _on_mine_pressed() -> void:
-	pass # Replace with function body.
+	Global.gold_count += 1
+	gold_text.text = str(Global.gold_count)
 
 
 func _on_reset_button_pressed() -> void:
@@ -10,14 +21,6 @@ func _on_reset_button_pressed() -> void:
 
 
 func _on_volume_button_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_music_button_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_sfx_button_pressed() -> void:
 	pass # Replace with function body.
 
 
