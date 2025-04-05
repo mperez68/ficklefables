@@ -22,10 +22,35 @@ const _CLICKER_RATES: Dictionary = {
 	ClickerType.NOBLE: 5,
 	ClickerType.ROYAL_COURT: 10
 }
-
+const SAVE_PATH = "user://data.save"
+const SETTINGS_PATH = "user://settings.save"
 var clicker_counts: Dictionary
 var gold_count: float = 0
 var rate: float = 0
+
+
+# Engine
+func _ready() -> void:
+	# Load Settings
+	if FileAccess.file_exists(SETTINGS_PATH):
+		var settings = FileAccess.open(SETTINGS_PATH, FileAccess.READ)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), settings.get_var())
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), settings.get_var())
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sfx"), settings.get_var())
+	# Load game data
+	if !FileAccess.file_exists(SAVE_PATH):
+		print("No current save file")
+		return
+	print("loading save file")
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	gold_count = file.get_var()
+	clicker_counts[ClickerType.PEASANT] = file.get_var()
+	clicker_counts[ClickerType.KNIGHT] = file.get_var()
+	clicker_counts[ClickerType.WIZARD] = file.get_var()
+	clicker_counts[ClickerType.NOBLE] = file.get_var()
+	clicker_counts[ClickerType.ROYAL_COURT] = file.get_var()
+	update_rate()
+
 
 # Public
 func get_cost(type: ClickerType) -> int:
@@ -58,6 +83,22 @@ func clear():
 	clicker_counts.clear()
 	gold_count = 0
 	update_rate()
+
+func save() -> void:
+	# Settings data
+	var settings = FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+	settings.store_var(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
+	settings.store_var(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
+	settings.store_var(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sfx")))
+	# Game data
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	print("Saving to %s" % SAVE_PATH)
+	file.store_var(gold_count)
+	file.store_var(clicker_counts.get(ClickerType.PEASANT), 0)
+	file.store_var(clicker_counts.get(ClickerType.KNIGHT), 0)
+	file.store_var(clicker_counts.get(ClickerType.WIZARD), 0)
+	file.store_var(clicker_counts.get(ClickerType.NOBLE), 0)
+	file.store_var(clicker_counts.get(ClickerType.ROYAL_COURT), 0)
 
 
 # Private
