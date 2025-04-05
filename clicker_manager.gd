@@ -1,13 +1,21 @@
 extends Control
 
+@onready var portent_text: Label = %PortentText
 @onready var gold_text: Label = %GoldLabel
 @onready var rate_text: Label = %RateLabel
 @onready var clicker_boxes: Array[Node] = $ClickerListContainer.get_children()
 @onready var audio_popup: Popup = $AudioPopupMenu
 @onready var reset_popup: PopupMenu = $ResetPopup
 
+@export var PORTENT_PATH: String
+
+var portents: Array
 
 # Engine
+func _ready() -> void:
+	var file = FileAccess.open(PORTENT_PATH, FileAccess.READ)
+	portents = file.get_as_text().split("\n")
+
 func _process(_delta: float) -> void:
 	rate_text.text = str(Global.rate, "/s")
 	gold_text.text = str(int(Global.gold_count))
@@ -46,3 +54,6 @@ func _on_music_slider_value_changed(value: float) -> void:
 
 func _on_sfx_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sfx"), linear_to_db(value))
+
+func _on_portent_timer_timeout() -> void:
+	portent_text.text = portents.pick_random()

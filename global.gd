@@ -15,13 +15,7 @@ const _CLICKER_NAMES: Dictionary = {
 	ClickerType.NOBLE: "Noble",
 	ClickerType.ROYAL_COURT: "Royalty"
 }
-const _CLICKER_RATES: Dictionary = {
-	ClickerType.PEASANT: 0.1,
-	ClickerType.KNIGHT: 0.5,
-	ClickerType.WIZARD: 1,
-	ClickerType.NOBLE: 5,
-	ClickerType.ROYAL_COURT: 10
-}
+
 const SAVE_PATH = "user://data.save"
 const SETTINGS_PATH = "user://settings.save"
 var clicker_counts: Dictionary
@@ -81,7 +75,7 @@ func increment(type: ClickerType):
 func update_rate():
 	rate = 0
 	for type in ClickerType.size():
-		rate = rate + (get_count(type) * _CLICKER_RATES[type])
+		rate = rate + (get_count(type) * _CLICKER_BASE_COSTS[type] * 0.01)
 
 func clear():
 	clicker_counts.clear()

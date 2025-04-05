@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://sq65lne138lp"]
 
-[ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://theme.tres" id="1_oljoq"]
+[ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://assets/theme.tres" id="1_oljoq"]
 [ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="2_6mp7d"]
 [ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://clicker_manager.gd" id="2_di3a2"]
-[ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://goldmine.jpg" id="3_di3a2"]
+[ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://assets/goldmine.jpg" id="3_di3a2"]
 [ext_resource type="Script" uid="uid://dm6kea7yfwvv6" path="res://box_setter.gd" id="3_i6j1w"]
-[ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://Intro_Fanfare.wav" id="5_bu30o"]
+[ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://assets/Intro_Fanfare.wav" id="5_bu30o"]
 
 [node name="ClickerManager" type="Control"]
 layout_mode = 3
@@ -17,6 +17,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_oljoq")
 script = ExtResource("2_di3a2")
+PORTENT_PATH = "res://assets/text/portents.txt"
 
 [node name="ResetPopup" type="PopupMenu" parent="."]
 initial_position = 1
@@ -52,7 +53,6 @@ text = "RESET GAME
 title = "VOLUME"
 initial_position = 1
 size = Vector2i(200, 200)
-visible = true
 
 [node name="Control" type="Control" parent="AudioPopupMenu"]
 layout_mode = 3
@@ -113,18 +113,24 @@ layout_mode = 2
 action_mode = 0
 text = "CANCEL"
 
-[node name="MineContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.319
+anchor_top = 0.196
+anchor_right = 0.681
+anchor_bottom = 0.804
+offset_left = 188.512
+offset_top = 176.992
+offset_right = -188.512
+offset_bottom = -176.992
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="Button" type="Button" parent="MineContainer"]
+[node name="Button" type="Button" parent="CenterContainer"]
 layout_mode = 2
 icon = ExtResource("3_di3a2")
+icon_alignment = 1
 
 [node name="ClickerListContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -213,7 +219,8 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="TopContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TopContainer/PanelContainer/MarginContainer"]
+[node name="PortentText" type="Label" parent="TopContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "[PORTENTS]"
 horizontal_alignment = 1
@@ -344,12 +351,16 @@ stream = ExtResource("5_bu30o")
 autoplay = true
 bus = &"Music"
 
+[node name="PortentTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="pressed" from="ResetPopup/Control/MarginContainer/Button" to="." method="_on_final_reset_button_pressed"]
 [connection signal="value_changed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/Button" to="." method="_on_popup_button_pressed"]
-[connection signal="pressed" from="MineContainer/Button" to="." method="_on_mine_pressed"]
+[connection signal="pressed" from="CenterContainer/Button" to="." method="_on_mine_pressed"]
 [connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/VolumeButton" to="." method="_on_volume_button_pressed"]
 [connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="timeout" from="PortentTimer" to="." method="_on_portent_timer_timeout"]
