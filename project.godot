@@ -12,7 +12,7 @@ config_version=5
 
 config/name="storyclicker"
 config/tags=PackedStringArray("proof_of_concept")
-run/main_scene="uid://sq65lne138lp"
+run/main_scene="uid://dhbl7bylibee0"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,3 +23,11 @@ buses/default_bus_layout="res://assets/default_bus_layout.tres"
 [autoload]
 
 Global="*res://global.tscn"
+
+[display]
+
+window/size/viewport_width=1980
+window/size/viewport_height=1240
+window/size/mode=2
+window/size/resizable=false
+window/size/borderless=true

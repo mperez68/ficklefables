@@ -35,6 +35,7 @@ func _on_final_reset_button_pressed() -> void:
 		box.clear()
 	reset_popup.visible = false
 	Global.save()
+	$ScrollContainer.update()
 
 func _on_volume_button_pressed() -> void:
 	audio_popup.visible = !audio_popup.visible

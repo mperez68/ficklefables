@@ -1,5 +1,7 @@
 extends Node
 
+signal counts_updated
+
 enum ClickerType{ PEASANT, KNIGHT, WIZARD, NOBLE, ROYAL_COURT }
 const _CLICKER_BASE_COSTS: Dictionary = {
 	ClickerType.PEASANT: 10,
@@ -71,6 +73,7 @@ func increment(type: ClickerType):
 	else:
 		clicker_counts.set(type, 1)
 	update_rate()
+	counts_updated.emit()
 
 func update_rate():
 	rate = 0

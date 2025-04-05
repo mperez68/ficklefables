@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://sq65lne138lp"]
+[gd_scene load_steps=7 format=3 uid="uid://224rhc6kj1n1"]
 
 [ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://assets/theme.tres" id="1_oljoq"]
 [ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="2_6mp7d"]
 [ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://clicker_manager.gd" id="2_di3a2"]
 [ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://assets/goldmine.jpg" id="3_di3a2"]
 [ext_resource type="Script" uid="uid://dm6kea7yfwvv6" path="res://box_setter.gd" id="3_i6j1w"]
-[ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://assets/Intro_Fanfare.wav" id="5_bu30o"]
+[ext_resource type="Script" uid="uid://dki6k4ydo13x4" path="res://scroll_container.gd" id="6_l6kom"]
 
 [node name="ClickerManager" type="Control"]
 layout_mode = 3
@@ -115,15 +115,15 @@ text = "CANCEL"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.319
-anchor_top = 0.196
-anchor_right = 0.681
-anchor_bottom = 0.804
-offset_left = 188.512
-offset_top = 176.992
-offset_right = -188.512
-offset_bottom = -176.992
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -316.0
+offset_right = 560.0
+offset_bottom = 316.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -134,10 +134,11 @@ icon_alignment = 1
 
 [node name="ClickerListContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -184.0
 grow_horizontal = 0
 grow_vertical = 2
 alignment = 1
@@ -168,8 +169,6 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -92.0
-offset_right = 92.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -207,9 +206,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -350.0
+offset_right = 350.0
+offset_bottom = 123.0
 grow_horizontal = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="TopContainer"]
@@ -264,11 +263,14 @@ text = "#/s"
 
 [node name="ScrollContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = -1
+anchor_right = 0.19
 anchor_bottom = 1.0
-offset_right = 184.0
+offset_right = 0.11998
 grow_vertical = 2
 alignment = 1
+script = ExtResource("6_l6kom")
+scroll_text_paths = Array[String](["res://assets/text/peasantscrolls.txt", "res://assets/text/knightscrolls.txt", "res://assets/text/wizardscrolls.txt", "res://assets/text/noblescrolls.txt", "res://assets/text/royaltyscrolls.txt"])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
@@ -286,72 +288,122 @@ text = "SCROLLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ButtonHboxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/ButtonHboxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/ButtonHboxContainer/PanelContainer"]
+layout_mode = 2
+text = "P"
+
+[node name="PanelContainer2" type="PanelContainer" parent="ScrollContainer/ButtonHboxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/ButtonHboxContainer/PanelContainer2"]
+layout_mode = 2
+text = "K"
+
+[node name="PanelContainer3" type="PanelContainer" parent="ScrollContainer/ButtonHboxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/ButtonHboxContainer/PanelContainer3"]
+layout_mode = 2
+text = "W"
+
+[node name="PanelContainer4" type="PanelContainer" parent="ScrollContainer/ButtonHboxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/ButtonHboxContainer/PanelContainer4"]
+layout_mode = 2
+text = "N"
+
+[node name="PanelContainer5" type="PanelContainer" parent="ScrollContainer/ButtonHboxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/ButtonHboxContainer/PanelContainer5"]
+layout_mode = 2
+text = "R"
+
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer2"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/PanelContainer2/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PanelContainer3" type="PanelContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer3"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/PanelContainer3/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PanelContainer4" type="PanelContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer4"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/PanelContainer4/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PanelContainer5" type="PanelContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/PanelContainer5"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/PanelContainer5/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_bu30o")
-autoplay = true
-bus = &"Music"
+autowrap_mode = 2
 
 [node name="PortentTimer" type="Timer" parent="."]
+wait_time = 300.0
 autostart = true
 
 [connection signal="pressed" from="ResetPopup/Control/MarginContainer/Button" to="." method="_on_final_reset_button_pressed"]
@@ -363,4 +415,9 @@ autostart = true
 [connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/VolumeButton" to="." method="_on_volume_button_pressed"]
 [connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/ButtonHboxContainer/PanelContainer/Button" to="ScrollContainer" method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="ScrollContainer/ButtonHboxContainer/PanelContainer2/Button" to="ScrollContainer" method="_on_button_pressed" binds= [1]]
+[connection signal="pressed" from="ScrollContainer/ButtonHboxContainer/PanelContainer3/Button" to="ScrollContainer" method="_on_button_pressed" binds= [2]]
+[connection signal="pressed" from="ScrollContainer/ButtonHboxContainer/PanelContainer4/Button" to="ScrollContainer" method="_on_button_pressed" binds= [3]]
+[connection signal="pressed" from="ScrollContainer/ButtonHboxContainer/PanelContainer5/Button" to="ScrollContainer" method="_on_button_pressed" binds= [4]]
 [connection signal="timeout" from="PortentTimer" to="." method="_on_portent_timer_timeout"]
