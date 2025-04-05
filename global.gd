@@ -39,9 +39,9 @@ func _ready() -> void:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sfx"), settings.get_var())
 	# Load game data
 	if !FileAccess.file_exists(SAVE_PATH):
-		print("No current save file")
+		print(Time.get_time_string_from_system() + ": No current save file")
 		return
-	print("loading save file")
+	print(Time.get_time_string_from_system() + ": loading save file")
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 	gold_count = file.get_var()
 	clicker_counts[ClickerType.PEASANT] = file.get_var()
@@ -50,6 +50,10 @@ func _ready() -> void:
 	clicker_counts[ClickerType.NOBLE] = file.get_var()
 	clicker_counts[ClickerType.ROYAL_COURT] = file.get_var()
 	update_rate()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save()
 
 
 # Public
@@ -92,7 +96,7 @@ func save() -> void:
 	settings.store_var(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Sfx")))
 	# Game data
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	print("Saving to %s" % SAVE_PATH)
+	print(Time.get_time_string_from_system() + ": Saving")
 	file.store_var(gold_count)
 	file.store_var(clicker_counts.get(ClickerType.PEASANT), 0)
 	file.store_var(clicker_counts.get(ClickerType.KNIGHT), 0)

@@ -3,7 +3,7 @@ extends Control
 @onready var gold_text: Label = %GoldLabel
 @onready var rate_text: Label = %RateLabel
 @onready var clicker_boxes: Array[Node] = $ClickerListContainer.get_children()
-@onready var audio_popup: PopupMenu = $AudioPopupMenu
+@onready var audio_popup: Popup = $AudioPopupMenu
 @onready var reset_popup: PopupMenu = $ResetPopup
 
 
