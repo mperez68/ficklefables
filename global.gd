@@ -54,5 +54,12 @@ func update_rate():
 	for type in ClickerType.size():
 		rate = rate + (get_count(type) * _CLICKER_RATES[type])
 
+func clear():
+	clicker_counts.clear()
+	gold_count = 0
+	update_rate()
+
+
+# Private
 func _on_gold_timer_timeout() -> void:
 	gold_count += rate

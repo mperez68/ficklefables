@@ -9,12 +9,19 @@ class_name ClickerBox extends VBoxContainer
 
 # Engine
 func _ready() -> void:
+	clear()
 	name_text.text = Global.get_clicker_name(type)
 	button.text = str(Global.get_cost(type))
 
 func _process(_delta: float) -> void:
 	button.disabled = Global.gold_count < Global.get_cost(type)
 
+
+# Public
+func clear():
+	button.text = str(Global.get_cost(type))
+	$HBoxContainer/PanelContainer3/MarginContainer/IconContainer/Label.text = str(Global.get_count(type))	# TODO replace with icons
+	
 
 # Signals
 func _on_button_pressed() -> void:

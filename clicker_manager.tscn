@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://sq65lne138lp"]
+[gd_scene load_steps=7 format=3 uid="uid://sq65lne138lp"]
 
 [ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://theme.tres" id="1_oljoq"]
 [ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="2_6mp7d"]
 [ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://clicker_manager.gd" id="2_di3a2"]
 [ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://goldmine.jpg" id="3_di3a2"]
+[ext_resource type="Script" uid="uid://dm6kea7yfwvv6" path="res://box_setter.gd" id="3_i6j1w"]
+[ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://Intro_Fanfare.wav" id="5_bu30o"]
 
 [node name="ClickerManager" type="Control"]
 layout_mode = 3
@@ -12,8 +14,118 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_oljoq")
 script = ExtResource("2_di3a2")
+
+[node name="ResetPopup" type="PopupMenu" parent="."]
+initial_position = 1
+size = Vector2i(250, 100)
+theme = ExtResource("1_oljoq")
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+
+[node name="Control" type="Control" parent="ResetPopup"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ResetPopup/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="ResetPopup/Control/MarginContainer"]
+layout_mode = 2
+action_mode = 0
+text = "RESET GAME
+(CANNOT BE UNDONE)"
+
+[node name="AudioPopupMenu" type="PopupMenu" parent="."]
+title = "VOLUME"
+initial_position = 1
+size = Vector2i(200, 200)
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+
+[node name="Control" type="Control" parent="AudioPopupMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_oljoq")
+
+[node name="MarginContainer" type="MarginContainer" parent="AudioPopupMenu/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AudioPopupMenu/Control/MarginContainer"]
+layout_mode = 2
+script = ExtResource("3_i6j1w")
+
+[node name="Label" type="Label" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "MASTER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 6.0
+
+[node name="Label2" type="Label" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "MUSIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 6.0
+
+[node name="Label3" type="Label" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -80.0
+max_value = 6.0
+
+[node name="Button" type="Button" parent="AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "CANCEL"
+
+[node name="MineContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="MineContainer"]
+layout_mode = 2
+icon = ExtResource("3_di3a2")
 
 [node name="ClickerListContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -44,50 +156,46 @@ type = 3
 layout_mode = 2
 type = 4
 
-[node name="MenuContainer" type="PanelContainer" parent="."]
+[node name="MenuContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -156.5
-offset_top = -47.0
-offset_right = 156.5
+offset_left = -92.0
+offset_right = 92.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ResetButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "RESET"
 
-[node name="VolumeButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+[node name="VolumeButton" type="Button" parent="MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "VOLUME"
 
-[node name="ExitButton" type="Button" parent="MenuContainer/MarginContainer/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "EXIT"
-
-[node name="MineContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Button" type="Button" parent="MineContainer"]
-layout_mode = 2
-icon = ExtResource("3_di3a2")
 
 [node name="TopContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -232,7 +340,17 @@ text = "[TEXT]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/VolumeButton" to="." method="_on_volume_button_pressed"]
-[connection signal="pressed" from="MenuContainer/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bu30o")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="ResetPopup/Control/MarginContainer/Button" to="." method="_on_final_reset_button_pressed"]
+[connection signal="value_changed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="AudioPopupMenu/Control/MarginContainer/VBoxContainer/Button" to="." method="_on_popup_button_pressed"]
 [connection signal="pressed" from="MineContainer/Button" to="." method="_on_mine_pressed"]
+[connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/VolumeButton" to="." method="_on_volume_button_pressed"]
+[connection signal="pressed" from="MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
