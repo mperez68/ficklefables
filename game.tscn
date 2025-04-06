@@ -118,26 +118,24 @@ layout_mode = 2
 action_mode = 0
 text = "CANCEL"
 
-[node name="CenterContainer" type="CenterContainer" parent="ClickerManager"]
+[node name="MineButton" type="Button" parent="ClickerManager"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.283
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -560.0
-offset_top = -316.0
-offset_right = 560.0
-offset_bottom = 316.0
+anchor_bottom = 0.717
+offset_left = -200.0
+offset_top = 0.0739746
+offset_right = 200.0
+offset_bottom = -0.0740356
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Button" type="Button" parent="ClickerManager/CenterContainer"]
-layout_mode = 2
 icon = ExtResource("4_hve3p")
 icon_alignment = 1
+expand_icon = true
 
-[node name="ClickerListContainer" type="VBoxContainer" parent="ClickerManager"]
+[node name="ClickerListContainer" type="VFlowContainer" parent="ClickerManager"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -147,6 +145,7 @@ offset_left = -184.0
 grow_horizontal = 0
 grow_vertical = 2
 alignment = 1
+reverse_fill = true
 
 [node name="ClickerBox" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
@@ -198,6 +197,10 @@ alignment = 1
 layout_mode = 2
 text = "RESET"
 
+[node name="ScreenButton" type="Button" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "HALF-SCREEN"
+
 [node name="VolumeButton" type="Button" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "VOLUME"
@@ -217,7 +220,7 @@ offset_bottom = 123.0
 grow_horizontal = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="ClickerManager/TopContainer"]
-custom_minimum_size = Vector2(700, 80)
+custom_minimum_size = Vector2(800, 40)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="ClickerManager/TopContainer/PanelContainer"]
@@ -419,8 +422,9 @@ autostart = true
 [connection signal="value_changed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/MusicSlider" to="ClickerManager" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/SFXSlider" to="ClickerManager" method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/Button" to="ClickerManager" method="_on_popup_button_pressed"]
-[connection signal="pressed" from="ClickerManager/CenterContainer/Button" to="ClickerManager" method="_on_mine_pressed"]
+[connection signal="pressed" from="ClickerManager/MineButton" to="ClickerManager" method="_on_mine_pressed"]
 [connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ResetButton" to="ClickerManager" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ScreenButton" to="ClickerManager" method="_on_screen_button_pressed"]
 [connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/VolumeButton" to="ClickerManager" method="_on_volume_button_pressed"]
 [connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ExitButton" to="ClickerManager" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer/Button" to="ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [0]]

@@ -1,6 +1,11 @@
 extends Control
 
 const PORTENT_PATH: String = "res://assets/text/portents.txt"
+const FULL_TEXT: String = "FULLSCREEN"
+const HALF_TEXT: String = "HALF-SCREEN"
+
+@onready var FULL_SCREEN: Vector2i = DisplayServer.screen_get_size() * 0.9
+@onready var HALF_SCREEN: Vector2i = Vector2i(FULL_SCREEN.x, FULL_SCREEN.y / 3)
 
 @onready var portent_text: Label = %PortentText
 @onready var gold_text: Label = %GoldLabel
@@ -8,8 +13,12 @@ const PORTENT_PATH: String = "res://assets/text/portents.txt"
 @onready var clicker_boxes: Array[Node] = $ClickerListContainer.get_children()
 @onready var audio_popup: Popup = $AudioPopupMenu
 @onready var reset_popup: PopupMenu = $ResetPopup
+@onready var mine_button: Button = $MineButton
+@onready var screen_button: Button = $MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ScreenButton
+@onready var scrolls: Container = $ScrollContainer
 
 var portents: Array
+var half_screen: bool = false
 
 # Engine
 func _ready() -> void:
@@ -36,7 +45,7 @@ func _on_final_reset_button_pressed() -> void:
 		box.clear()
 	reset_popup.visible = false
 	Global.save()
-	$ScrollContainer.update()
+	scrolls.update()
 
 func _on_volume_button_pressed() -> void:
 	audio_popup.visible = !audio_popup.visible
@@ -59,3 +68,18 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 func _on_portent_timer_timeout() -> void:
 	portent_text.text = portents.pick_random()
+
+func _on_screen_button_pressed() -> void:
+	if half_screen:
+		# Set Full Screen
+		screen_button.text = HALF_TEXT
+		DisplayServer.window_set_size(FULL_SCREEN)
+		scrolls.visible = true
+		mine_button.position.x = mine_button.position.x * 4
+	else:
+		# Set Half Screen
+		screen_button.text = FULL_TEXT
+		DisplayServer.window_set_size(HALF_SCREEN)
+		scrolls.visible = false
+		mine_button.position.x = mine_button.position.x / 4
+	half_screen = !half_screen
