@@ -30,3 +30,4 @@ window/size/viewport_width=1728
 window/size/viewport_height=972
 window/size/resizable=false
 window/size/borderless=true
+window/size/always_on_top=true
