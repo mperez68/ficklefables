@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dhbl7bylibee0"]
 
-[ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://assets/theme.tres" id="1_80nbo"]
-[ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://clicker_manager.gd" id="2_eow3j"]
-[ext_resource type="Script" uid="uid://dm6kea7yfwvv6" path="res://box_setter.gd" id="3_j5wjh"]
-[ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://assets/goldmine.jpg" id="4_vef74"]
-[ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="5_hve3p"]
-[ext_resource type="Script" uid="uid://dki6k4ydo13x4" path="res://scroll_container.gd" id="6_mfdv2"]
-[ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://assets/Intro_Fanfare.wav" id="7_iotsf"]
+[ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://assets/theme.tres" id="1_eow3j"]
+[ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://scripts/clicker_manager.gd" id="2_j5wjh"]
+[ext_resource type="Script" uid="uid://dm6kea7yfwvv6" path="res://scripts/box_setter.gd" id="3_vef74"]
+[ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://assets/goldmine.jpg" id="4_hve3p"]
+[ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="5_mfdv2"]
+[ext_resource type="Script" uid="uid://dki6k4ydo13x4" path="res://scripts/scroll_container.gd" id="6_iotsf"]
+[ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://assets/Intro_Fanfare.wav" id="7_lc2xo"]
 
 [node name="Game" type="MarginContainer"]
 anchors_preset = 15
@@ -21,14 +21,13 @@ theme_override_constants/margin_bottom = 25
 
 [node name="ClickerManager" type="Control" parent="."]
 layout_mode = 2
-theme = ExtResource("1_80nbo")
-script = ExtResource("2_eow3j")
-PORTENT_PATH = "res://assets/text/portents.txt"
+theme = ExtResource("1_eow3j")
+script = ExtResource("2_j5wjh")
 
 [node name="ResetPopup" type="PopupMenu" parent="ClickerManager"]
 initial_position = 1
 size = Vector2i(250, 100)
-theme = ExtResource("1_80nbo")
+theme = ExtResource("1_eow3j")
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 
@@ -67,7 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_80nbo")
+theme = ExtResource("1_eow3j")
 
 [node name="MarginContainer" type="MarginContainer" parent="ClickerManager/AudioPopupMenu/Control"]
 layout_mode = 1
@@ -79,7 +78,7 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer"]
 layout_mode = 2
-script = ExtResource("3_j5wjh")
+script = ExtResource("3_vef74")
 
 [node name="Label" type="Label" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -135,7 +134,7 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="ClickerManager/CenterContainer"]
 layout_mode = 2
-icon = ExtResource("4_vef74")
+icon = ExtResource("4_hve3p")
 icon_alignment = 1
 
 [node name="ClickerListContainer" type="VBoxContainer" parent="ClickerManager"]
@@ -149,22 +148,22 @@ grow_horizontal = 0
 grow_vertical = 2
 alignment = 1
 
-[node name="ClickerBox" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_hve3p")]
+[node name="ClickerBox" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 
-[node name="ClickerBox2" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_hve3p")]
+[node name="ClickerBox2" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 1
 
-[node name="ClickerBox3" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_hve3p")]
+[node name="ClickerBox3" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 2
 
-[node name="ClickerBox4" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_hve3p")]
+[node name="ClickerBox4" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 3
 
-[node name="ClickerBox5" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_hve3p")]
+[node name="ClickerBox5" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 4
 
@@ -274,9 +273,7 @@ anchor_right = 0.19
 anchor_bottom = 1.0
 offset_right = 0.11998
 grow_vertical = 2
-alignment = 1
-script = ExtResource("6_mfdv2")
-scroll_text_paths = Array[String](["res://assets/text/peasantscrolls.txt", "res://assets/text/knightscrolls.txt", "res://assets/text/wizardscrolls.txt", "res://assets/text/noblescrolls.txt", "res://assets/text/royaltyscrolls.txt"])
+script = ExtResource("6_iotsf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ClickerManager/ScrollContainer"]
 layout_mode = 2
@@ -409,7 +406,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="ClickerManager"]
-stream = ExtResource("7_iotsf")
+stream = ExtResource("7_lc2xo")
 autoplay = true
 bus = &"Music"
 

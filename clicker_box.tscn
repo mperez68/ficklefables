@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccw4qq2b0y87u"]
 
-[ext_resource type="Script" uid="uid://bkj8qpl1ubi67" path="res://clicker_box.gd" id="1_8ry5f"]
+[ext_resource type="Script" uid="uid://bkj8qpl1ubi67" path="res://scripts/clicker_box.gd" id="1_8ry5f"]
 [ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://assets/theme.tres" id="1_vqjli"]
 
 [node name="ClickerBox" type="VBoxContainer"]

@@ -1,8 +1,21 @@
 extends VBoxContainer
 
-@onready var scrolls: Array = [ $PanelContainer/MarginContainer/Label,$PanelContainer2/MarginContainer/Label, $PanelContainer3/MarginContainer/Label, $PanelContainer4/MarginContainer/Label, $PanelContainer5/MarginContainer/Label ]
+const SCROLL_PATHS: Array[String] = [
+	"res://assets/text/peasantscrolls.txt",
+	"res://assets/text/knightscrolls.txt",
+	"res://assets/text/wizardscrolls.txt",
+	"res://assets/text/noblescrolls.txt",
+	"res://assets/text/noblescrolls.txt"
+]
 
-@export var scroll_text_paths: Array[String] = []
+@onready var scrolls: Array = [
+	$PanelContainer/MarginContainer/Label,
+	$PanelContainer2/MarginContainer/Label,
+	$PanelContainer3/MarginContainer/Label,
+	$PanelContainer4/MarginContainer/Label,
+	$PanelContainer5/MarginContainer/Label
+]
+
 @export var selected_type: Global.ClickerType
 
 var scrolls_texts: Dictionary[Global.ClickerType, Array]
@@ -10,7 +23,7 @@ var scrolls_texts: Dictionary[Global.ClickerType, Array]
 
 # Engine
 func _ready() -> void:
-	for path in scroll_text_paths:
+	for path in SCROLL_PATHS:
 		var file = FileAccess.open(path, FileAccess.READ)
 		var lines: Array = file.get_as_text().split("\n")
 		var type: Global.ClickerType = lines[0].to_int()

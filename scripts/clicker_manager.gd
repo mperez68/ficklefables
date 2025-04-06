@@ -1,5 +1,7 @@
 extends Control
 
+const PORTENT_PATH: String = "res://assets/text/portents.txt"
+
 @onready var portent_text: Label = %PortentText
 @onready var gold_text: Label = %GoldLabel
 @onready var rate_text: Label = %RateLabel
@@ -7,14 +9,13 @@ extends Control
 @onready var audio_popup: Popup = $AudioPopupMenu
 @onready var reset_popup: PopupMenu = $ResetPopup
 
-@export var PORTENT_PATH: String
-
 var portents: Array
 
 # Engine
 func _ready() -> void:
 	var file = FileAccess.open(PORTENT_PATH, FileAccess.READ)
 	portents = file.get_as_text().split("\n")
+	_on_portent_timer_timeout()
 
 func _process(_delta: float) -> void:
 	rate_text.text = str(Global.rate, "/s")

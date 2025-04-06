@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="storyclicker"
+config/name="Fickle Fables"
 config/tags=PackedStringArray("proof_of_concept")
 run/main_scene="uid://dhbl7bylibee0"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://blmflfgqs5tvc"
 
 [audio]
 
