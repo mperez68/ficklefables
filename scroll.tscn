@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ofnh8kqh8wh"]
+
+[ext_resource type="Texture2D" uid="uid://h0p4558bpx1h" path="res://assets/graphics/scroll.png" id="1_kq3od"]
+
+[node name="Scroll" type="NinePatchRect"]
+size_flags_vertical = 3
+texture = ExtResource("1_kq3od")
+region_rect = Rect2(0, 0, 200, 200)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 11
+patch_margin_bottom = 9
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 309.0
+offset_bottom = 165.0
+
+[node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "[TEXT]"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

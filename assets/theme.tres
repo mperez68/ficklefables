@@ -1,6 +1,9 @@
-[gd_resource type="Theme" format=3 uid="uid://dfelcb10ewua1"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dfelcb10ewua1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y61vb"]
 
 [resource]
+Button/styles/focus = SubResource("StyleBoxEmpty_y61vb")
 MarginContainer/constants/margin_bottom = 8
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16

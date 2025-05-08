@@ -120,13 +120,13 @@ _data = {
 [node name="Face" type="TextureRect"]
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = -1
-anchor_right = 0.037
-anchor_bottom = 0.066
-offset_right = -63.936
-offset_bottom = -64.152
+anchor_right = 0.043
+anchor_bottom = 0.072
+offset_right = -74.304
+offset_bottom = -69.984
 pivot_offset = Vector2(32, 32)
 texture = ExtResource("1_7jkf7")
-expand_mode = 4
+stretch_mode = 2
 script = ExtResource("2_7jkf7")
 face_name = "NONE"
 

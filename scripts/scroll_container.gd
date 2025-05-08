@@ -9,11 +9,11 @@ const SCROLL_PATHS: Array[String] = [
 ]
 
 @onready var scrolls: Array = [
-	$PanelContainer/MarginContainer/Label,
-	$PanelContainer2/MarginContainer/Label,
-	$PanelContainer3/MarginContainer/Label,
-	$PanelContainer4/MarginContainer/Label,
-	$PanelContainer5/MarginContainer/Label
+	$Scroll/MarginContainer/Label,
+	$Scroll2/MarginContainer/Label,
+	$Scroll3/MarginContainer/Label,
+	$Scroll4/MarginContainer/Label,
+	$Scroll5/MarginContainer/Label
 ]
 
 @export var selected_type: Global.ClickerType

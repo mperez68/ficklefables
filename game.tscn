@@ -1,14 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhbl7bylibee0"]
+[gd_scene load_steps=10 format=3 uid="uid://dhbl7bylibee0"]
 
 [ext_resource type="Theme" uid="uid://dfelcb10ewua1" path="res://assets/theme.tres" id="1_eow3j"]
+[ext_resource type="Texture2D" uid="uid://cl4sg8wj6r7e3" path="res://assets/graphics/bg.png" id="1_j5wjh"]
 [ext_resource type="Script" uid="uid://h68460nkq8sa" path="res://scripts/clicker_manager.gd" id="2_j5wjh"]
 [ext_resource type="Script" uid="uid://dm6kea7yfwvv6" path="res://scripts/box_setter.gd" id="3_vef74"]
-[ext_resource type="Texture2D" uid="uid://blmflfgqs5tvc" path="res://assets/goldmine.jpg" id="4_hve3p"]
+[ext_resource type="Texture2D" uid="uid://c2ddgyu0w8ke4" path="res://assets/graphics/mine.png" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://ccw4qq2b0y87u" path="res://clicker_box.tscn" id="5_mfdv2"]
 [ext_resource type="Script" uid="uid://dki6k4ydo13x4" path="res://scripts/scroll_container.gd" id="6_iotsf"]
 [ext_resource type="AudioStream" uid="uid://dtkliwfycqer1" path="res://assets/Intro_Fanfare.wav" id="7_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://b7ofnh8kqh8wh" path="res://scroll.tscn" id="8_vef74"]
 
-[node name="Game" type="MarginContainer"]
+[node name="TextureRect" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_j5wjh")
+
+[node name="Game" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,19 +30,19 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 25
 
-[node name="ClickerManager" type="Control" parent="."]
+[node name="ClickerManager" type="Control" parent="Game"]
 layout_mode = 2
 theme = ExtResource("1_eow3j")
 script = ExtResource("2_j5wjh")
 
-[node name="ResetPopup" type="PopupMenu" parent="ClickerManager"]
+[node name="ResetPopup" type="PopupMenu" parent="Game/ClickerManager"]
 initial_position = 1
 size = Vector2i(250, 100)
 theme = ExtResource("1_eow3j")
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 
-[node name="Control" type="Control" parent="ClickerManager/ResetPopup"]
+[node name="Control" type="Control" parent="Game/ClickerManager/ResetPopup"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ResetPopup/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="Game/ClickerManager/ResetPopup/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,18 +59,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="ClickerManager/ResetPopup/Control/MarginContainer"]
+[node name="Button" type="Button" parent="Game/ClickerManager/ResetPopup/Control/MarginContainer"]
 layout_mode = 2
 action_mode = 0
 text = "RESET GAME
 (CANNOT BE UNDONE)"
 
-[node name="AudioPopupMenu" type="Popup" parent="ClickerManager"]
+[node name="AudioPopupMenu" type="Popup" parent="Game/ClickerManager"]
 title = "VOLUME"
 initial_position = 1
 size = Vector2i(200, 200)
 
-[node name="Control" type="Control" parent="ClickerManager/AudioPopupMenu"]
+[node name="Control" type="Control" parent="Game/ClickerManager/AudioPopupMenu"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,7 +79,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_eow3j")
 
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/AudioPopupMenu/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="Game/ClickerManager/AudioPopupMenu/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,49 +87,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer"]
 layout_mode = 2
 script = ExtResource("3_vef74")
 
-[node name="Label" type="Label" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "MASTER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MasterSlider" type="HSlider" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="MasterSlider" type="HSlider" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 
-[node name="Label2" type="Label" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "MUSIC"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicSlider" type="HSlider" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="MusicSlider" type="HSlider" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 
-[node name="Label3" type="Label" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "SFX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFXSlider" type="HSlider" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="SFXSlider" type="HSlider" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 
-[node name="Button" type="Button" parent="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 action_mode = 0
 text = "CANCEL"
 
-[node name="MineButton" type="Button" parent="ClickerManager"]
+[node name="MineButton" type="Button" parent="Game/ClickerManager"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -131,11 +142,14 @@ offset_right = 200.0
 offset_bottom = -0.0740356
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("4_hve3p")
+focus_mode = 1
+action_mode = 0
+icon = ExtResource("4_eow3j")
+flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="ClickerListContainer" type="VFlowContainer" parent="ClickerManager"]
+[node name="ClickerListContainer" type="VFlowContainer" parent="Game/ClickerManager"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -147,26 +161,26 @@ grow_vertical = 2
 alignment = 1
 reverse_fill = true
 
-[node name="ClickerBox" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
+[node name="ClickerBox" parent="Game/ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 
-[node name="ClickerBox2" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
+[node name="ClickerBox2" parent="Game/ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 1
 
-[node name="ClickerBox3" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
+[node name="ClickerBox3" parent="Game/ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 2
 
-[node name="ClickerBox4" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
+[node name="ClickerBox4" parent="Game/ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 3
 
-[node name="ClickerBox5" parent="ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
+[node name="ClickerBox5" parent="Game/ClickerManager/ClickerListContainer" instance=ExtResource("5_mfdv2")]
 layout_mode = 2
 type = 4
 
-[node name="MenuContainer" type="Control" parent="ClickerManager"]
+[node name="MenuContainer" type="Control" parent="Game/ClickerManager"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -176,7 +190,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="ClickerManager/MenuContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Game/ClickerManager/MenuContainer"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -186,30 +200,30 @@ offset_top = -47.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/MenuContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Game/ClickerManager/MenuContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ResetButton" type="Button" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="ResetButton" type="Button" parent="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "RESET"
 
-[node name="ScreenButton" type="Button" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="ScreenButton" type="Button" parent="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "HALF-SCREEN"
 
-[node name="VolumeButton" type="Button" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="VolumeButton" type="Button" parent="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "VOLUME"
 
-[node name="ExitButton" type="Button" parent="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="ExitButton" type="Button" parent="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "EXIT"
 
-[node name="TopContainer" type="VBoxContainer" parent="ClickerManager"]
+[node name="TopContainer" type="VBoxContainer" parent="Game/ClickerManager"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -219,57 +233,57 @@ offset_right = 350.0
 offset_bottom = 123.0
 grow_horizontal = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="ClickerManager/TopContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Game/ClickerManager/TopContainer"]
 custom_minimum_size = Vector2(800, 40)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/TopContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Game/ClickerManager/TopContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="PortentText" type="Label" parent="ClickerManager/TopContainer/PanelContainer/MarginContainer"]
+[node name="PortentText" type="Label" parent="Game/ClickerManager/TopContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "[PORTENTS]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ClickerManager/TopContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/ClickerManager/TopContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="ClickerManager/TopContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Game/ClickerManager/TopContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/TopContainer/HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Game/ClickerManager/TopContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/TopContainer/HBoxContainer/PanelContainer/MarginContainer"]
+[node name="Label" type="Label" parent="Game/ClickerManager/TopContainer/HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 text = "GOLD:"
 
-[node name="PanelContainer2" type="PanelContainer" parent="ClickerManager/TopContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="Game/ClickerManager/TopContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="ClickerManager/TopContainer/HBoxContainer/PanelContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="Game/ClickerManager/TopContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
 
-[node name="GoldLabel" type="Label" parent="ClickerManager/TopContainer/HBoxContainer/PanelContainer2/MarginContainer2"]
+[node name="GoldLabel" type="Label" parent="Game/ClickerManager/TopContainer/HBoxContainer/PanelContainer2/MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "###"
 
-[node name="PanelContainer3" type="PanelContainer" parent="ClickerManager/TopContainer/HBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="Game/ClickerManager/TopContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="ClickerManager/TopContainer/HBoxContainer/PanelContainer3"]
+[node name="MarginContainer2" type="MarginContainer" parent="Game/ClickerManager/TopContainer/HBoxContainer/PanelContainer3"]
 layout_mode = 2
 
-[node name="RateLabel" type="Label" parent="ClickerManager/TopContainer/HBoxContainer/PanelContainer3/MarginContainer2"]
+[node name="RateLabel" type="Label" parent="Game/ClickerManager/TopContainer/HBoxContainer/PanelContainer3/MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "#/s"
 
-[node name="ScrollContainer" type="VBoxContainer" parent="ClickerManager"]
+[node name="ScrollContainer" type="VBoxContainer" parent="Game/ClickerManager"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.19
@@ -278,158 +292,98 @@ offset_right = 0.11998
 grow_vertical = 2
 script = ExtResource("6_iotsf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ClickerManager/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/ClickerManager/ScrollContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="ClickerManager/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Game/ClickerManager/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ScrollContainer/HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Game/ClickerManager/ScrollContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/ScrollContainer/HBoxContainer/PanelContainer/MarginContainer"]
+[node name="Label" type="Label" parent="Game/ClickerManager/ScrollContainer/HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 text = "SCROLLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonHboxContainer" type="HBoxContainer" parent="ClickerManager/ScrollContainer"]
+[node name="ButtonHboxContainer" type="HBoxContainer" parent="Game/ClickerManager/ScrollContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="ClickerManager/ScrollContainer/ButtonHboxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer"]
+[node name="Button" type="Button" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer"]
 layout_mode = 2
 text = "P"
 
-[node name="PanelContainer2" type="PanelContainer" parent="ClickerManager/ScrollContainer/ButtonHboxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer2"]
+[node name="Button" type="Button" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer2"]
 layout_mode = 2
 text = "K"
 
-[node name="PanelContainer3" type="PanelContainer" parent="ClickerManager/ScrollContainer/ButtonHboxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer3"]
+[node name="Button" type="Button" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer3"]
 layout_mode = 2
 text = "W"
 
-[node name="PanelContainer4" type="PanelContainer" parent="ClickerManager/ScrollContainer/ButtonHboxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer4"]
+[node name="Button" type="Button" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer4"]
 layout_mode = 2
 text = "N"
 
-[node name="PanelContainer5" type="PanelContainer" parent="ClickerManager/ScrollContainer/ButtonHboxContainer"]
+[node name="PanelContainer5" type="PanelContainer" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer5"]
+[node name="Button" type="Button" parent="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer5"]
 layout_mode = 2
 text = "R"
 
-[node name="PanelContainer" type="PanelContainer" parent="ClickerManager/ScrollContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ScrollContainer/PanelContainer"]
+[node name="Scroll" parent="Game/ClickerManager/ScrollContainer" instance=ExtResource("8_vef74")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/ScrollContainer/PanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "[TEXT]"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="PanelContainer2" type="PanelContainer" parent="ClickerManager/ScrollContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ScrollContainer/PanelContainer2"]
+[node name="Scroll2" parent="Game/ClickerManager/ScrollContainer" instance=ExtResource("8_vef74")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/ScrollContainer/PanelContainer2/MarginContainer"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "[TEXT]"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="PanelContainer3" type="PanelContainer" parent="ClickerManager/ScrollContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ScrollContainer/PanelContainer3"]
+[node name="Scroll3" parent="Game/ClickerManager/ScrollContainer" instance=ExtResource("8_vef74")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/ScrollContainer/PanelContainer3/MarginContainer"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "[TEXT]"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="PanelContainer4" type="PanelContainer" parent="ClickerManager/ScrollContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ScrollContainer/PanelContainer4"]
+[node name="Scroll4" parent="Game/ClickerManager/ScrollContainer" instance=ExtResource("8_vef74")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/ScrollContainer/PanelContainer4/MarginContainer"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "[TEXT]"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="PanelContainer5" type="PanelContainer" parent="ClickerManager/ScrollContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="ClickerManager/ScrollContainer/PanelContainer5"]
+[node name="Scroll5" parent="Game/ClickerManager/ScrollContainer" instance=ExtResource("8_vef74")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ClickerManager/ScrollContainer/PanelContainer5/MarginContainer"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "[TEXT]"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Music" type="AudioStreamPlayer" parent="ClickerManager"]
+[node name="Music" type="AudioStreamPlayer" parent="Game/ClickerManager"]
 stream = ExtResource("7_lc2xo")
 autoplay = true
 bus = &"Music"
 
-[node name="PortentTimer" type="Timer" parent="ClickerManager"]
+[node name="PortentTimer" type="Timer" parent="Game/ClickerManager"]
 wait_time = 300.0
 autostart = true
 
-[connection signal="pressed" from="ClickerManager/ResetPopup/Control/MarginContainer/Button" to="ClickerManager" method="_on_final_reset_button_pressed"]
-[connection signal="value_changed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/MasterSlider" to="ClickerManager" method="_on_master_slider_value_changed"]
-[connection signal="value_changed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/MusicSlider" to="ClickerManager" method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/SFXSlider" to="ClickerManager" method="_on_sfx_slider_value_changed"]
-[connection signal="pressed" from="ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/Button" to="ClickerManager" method="_on_popup_button_pressed"]
-[connection signal="pressed" from="ClickerManager/MineButton" to="ClickerManager" method="_on_mine_pressed"]
-[connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ResetButton" to="ClickerManager" method="_on_reset_button_pressed"]
-[connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ScreenButton" to="ClickerManager" method="_on_screen_button_pressed"]
-[connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/VolumeButton" to="ClickerManager" method="_on_volume_button_pressed"]
-[connection signal="pressed" from="ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ExitButton" to="ClickerManager" method="_on_exit_button_pressed"]
-[connection signal="pressed" from="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer/Button" to="ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [0]]
-[connection signal="pressed" from="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer2/Button" to="ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [1]]
-[connection signal="pressed" from="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer3/Button" to="ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [2]]
-[connection signal="pressed" from="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer4/Button" to="ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [3]]
-[connection signal="pressed" from="ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer5/Button" to="ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [4]]
-[connection signal="timeout" from="ClickerManager/PortentTimer" to="ClickerManager" method="_on_portent_timer_timeout"]
+[connection signal="pressed" from="Game/ClickerManager/ResetPopup/Control/MarginContainer/Button" to="Game/ClickerManager" method="_on_final_reset_button_pressed"]
+[connection signal="value_changed" from="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/MasterSlider" to="Game/ClickerManager" method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/MusicSlider" to="Game/ClickerManager" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/SFXSlider" to="Game/ClickerManager" method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Game/ClickerManager/AudioPopupMenu/Control/MarginContainer/VBoxContainer/Button" to="Game/ClickerManager" method="_on_popup_button_pressed"]
+[connection signal="pressed" from="Game/ClickerManager/MineButton" to="Game/ClickerManager" method="_on_mine_pressed"]
+[connection signal="pressed" from="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ResetButton" to="Game/ClickerManager" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ScreenButton" to="Game/ClickerManager" method="_on_screen_button_pressed"]
+[connection signal="pressed" from="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/VolumeButton" to="Game/ClickerManager" method="_on_volume_button_pressed"]
+[connection signal="pressed" from="Game/ClickerManager/MenuContainer/PanelContainer/MarginContainer/HBoxContainer/ExitButton" to="Game/ClickerManager" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer/Button" to="Game/ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer2/Button" to="Game/ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [1]]
+[connection signal="pressed" from="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer3/Button" to="Game/ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [2]]
+[connection signal="pressed" from="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer4/Button" to="Game/ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [3]]
+[connection signal="pressed" from="Game/ClickerManager/ScrollContainer/ButtonHboxContainer/PanelContainer5/Button" to="Game/ClickerManager/ScrollContainer" method="_on_button_pressed" binds= [4]]
+[connection signal="timeout" from="Game/ClickerManager/PortentTimer" to="Game/ClickerManager" method="_on_portent_timer_timeout"]
