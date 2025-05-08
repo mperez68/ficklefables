@@ -46,5 +46,6 @@ func update():
 
 # Signals
 func _on_button_pressed(new_type: int) -> void:
+	@warning_ignore("int_as_enum_without_cast")
 	selected_type = new_type
 	update()

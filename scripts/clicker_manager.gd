@@ -5,6 +5,7 @@ const FULL_TEXT: String = "FULLSCREEN"
 const HALF_TEXT: String = "HALF-SCREEN"
 
 @onready var FULL_SCREEN: Vector2i = DisplayServer.screen_get_size() * 0.9
+@warning_ignore("integer_division", "narrowing_conversion")
 @onready var HALF_SCREEN: Vector2i = Vector2i(FULL_SCREEN.x / 0.9, FULL_SCREEN.y / 3)
 @onready var ORIGIN: Vector2 = DisplayServer.window_get_position()
 

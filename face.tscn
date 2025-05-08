@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://wqcv3bu03cj2"]
+
+[ext_resource type="Texture2D" uid="uid://cm0kdg6oyaswu" path="res://assets/graphics/wizard.png" id="1_7jkf7"]
+[ext_resource type="Script" uid="uid://ct82gp3lq710o" path="res://scripts/face.gd" id="2_7jkf7"]
+
+[sub_resource type="Gradient" id="Gradient_7jkf7"]
+offsets = PackedFloat32Array(0, 0.804511, 1)
+colors = PackedColorArray(0, 0, 0, 0.352941, 0, 0, 0, 0.513726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kttct"]
+gradient = SubResource("Gradient_7jkf7")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a4f38"]
+font_size = 11
+
+[sub_resource type="Animation" id="Animation_a4f38"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextBackground:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NameLabel:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kttct"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7jkf7"]
+resource_name = "focus"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4.5, 6),
+"transitions": PackedFloat32Array(0.5, 1.5, 0.5, 1.5, 0.5),
+"update": 0,
+"values": [0.0, 0.261799, 0.0, -0.261799, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextBackground:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4.5, 6),
+"transitions": PackedFloat32Array(0.5, 1.5, 0.5, 1.5, 0.5),
+"update": 0,
+"values": [0.0, -0.261799, 0.0, 0.261799, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NameLabel:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4.5, 6),
+"transitions": PackedFloat32Array(0.5, 1.5, 0.5, 1.5, 0.5),
+"update": 0,
+"values": [0.0, -0.261799, 0.0, 0.261799, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ncy3q"]
+_data = {
+&"RESET": SubResource("Animation_a4f38"),
+&"default": SubResource("Animation_kttct"),
+&"focus": SubResource("Animation_7jkf7")
+}
+
+[node name="Face" type="TextureRect"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.037
+anchor_bottom = 0.066
+offset_right = -63.936
+offset_bottom = -64.152
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("1_7jkf7")
+expand_mode = 4
+script = ExtResource("2_7jkf7")
+face_name = "NONE"
+
+[node name="TextBackground" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+texture = SubResource("GradientTexture2D_kttct")
+
+[node name="NameLabel" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+pivot_offset = Vector2(32, 32)
+text = "NAME"
+label_settings = SubResource("LabelSettings_a4f38")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ncy3q")
+}
+autoplay = "default"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

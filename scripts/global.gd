@@ -78,7 +78,7 @@ func increment(type: ClickerType):
 func update_rate():
 	rate = 0
 	for type in ClickerType.size():
-		rate = rate + (get_count(type) * _CLICKER_BASE_COSTS[type] * 0.01)
+		rate = rate + (get_count(type) * _CLICKER_BASE_COSTS[type] * 0.05)
 
 func clear():
 	clicker_counts.clear()

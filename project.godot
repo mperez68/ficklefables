@@ -31,3 +31,7 @@ window/size/viewport_height=972
 window/size/resizable=false
 window/size/borderless=true
 window/size/always_on_top=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
